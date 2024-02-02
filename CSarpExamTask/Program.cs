@@ -1,4 +1,5 @@
-﻿using CSarpExamTask.Entities;
+﻿using CSarpExamTask.DB;
+using CSarpExamTask.Entities;
 
 Console.WriteLine("Hello, World!");
 
@@ -22,3 +23,18 @@ Car car3 = new Car() { HumanId = human1.Id, Model = Models.Tesla, EngineSize = 3
 Console.WriteLine(car1.Id + "  " + car1.HumanId);
 Console.WriteLine(car2.Id + "  " + car2.HumanId);
 Console.WriteLine(car3.Id + "  " + car3.HumanId);
+
+using (ApplicationContext db = new ApplicationContext())
+{
+    // Додавання
+    db.Humans.Add(human1);
+    db.Humans.Add(human2);
+    db.Humans.Add(human3);
+    db.Cars.Add(car1);
+    db.Cars.Add(car2);
+    db.Cars.Add(car3);
+    db.Houses.Add(house1);
+    db.Houses.Add(house2);
+    db.Houses.Add(house3);
+    db.SaveChanges();
+}
