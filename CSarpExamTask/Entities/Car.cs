@@ -20,7 +20,7 @@ public enum Models
 }
 public class Car
 {
-    private static int idCounter = 1;
+    private static int _idCounter = 1;
 
     public int Id { get; }
     public int HumanId { get; set; }
@@ -30,6 +30,6 @@ public class Car
 
    public Car()
     {
-        Id = idCounter++;
+        Id = _idCounter++;
     }
 }
