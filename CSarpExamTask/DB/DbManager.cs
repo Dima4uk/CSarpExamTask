@@ -14,9 +14,9 @@ public class DbManager //<T> where T : class
 {
     private ApplicationContext _context;
 
-    public DbManager(ApplicationContext context)
+    public DbManager()
     {
-        _context = context;
+        _context = new ApplicationContext ();
     }
     public void Add<T>(T entity) where T : class
     {

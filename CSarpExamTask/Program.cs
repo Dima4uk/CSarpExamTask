@@ -25,7 +25,7 @@ Console.WriteLine(car2.Id + "  " + car2.HumanId);
 Console.WriteLine(car3.Id + "  " + car3.HumanId);
 
 
-DbManager db = new DbManager(new ApplicationContext());
+DbManager db = new DbManager();
 
 db.Add(human1);
 db.Add(human2);
