@@ -25,15 +25,15 @@ Console.WriteLine(car2.Id + "  " + car2.HumanId);
 Console.WriteLine(car3.Id + "  " + car3.HumanId);
 
 
-DbManager<Human> db = new DbManager<Human>(new ApplicationContext());
+DbManager db = new DbManager(new ApplicationContext());
 db.Add(human1);
 db.Add(human2);
 db.Add(human3);
 
-Human human = db.Read(2);
+Human human = db.Read<Human>(2);
 Console.WriteLine(human.Id + "  " + human.HouseId + "  " + human.Name);
 
 human.Name = "qwqwqe";
 db.Update(human);
 
-db.Remove(1);
+db.Remove<Human>(1);
