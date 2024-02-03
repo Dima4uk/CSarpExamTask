@@ -24,17 +24,16 @@ Console.WriteLine(car1.Id + "  " + car1.HumanId);
 Console.WriteLine(car2.Id + "  " + car2.HumanId);
 Console.WriteLine(car3.Id + "  " + car3.HumanId);
 
-using (ApplicationContext db = new ApplicationContext())
-{
-    // Додавання
-    db.Humans.Add(human1);
-    db.Humans.Add(human2);
-    db.Humans.Add(human3);
-    db.Cars.Add(car1);
-    db.Cars.Add(car2);
-    db.Cars.Add(car3);
-    db.Houses.Add(house1);
-    db.Houses.Add(house2);
-    db.Houses.Add(house3);
-    db.SaveChanges();
-}
+
+DbManager<Human> db = new DbManager<Human>(new ApplicationContext());
+db.Add(human1);
+db.Add(human2);
+db.Add(human3);
+
+Human human = db.Read(2);
+Console.WriteLine(human.Id + "  " + human.HouseId + "  " + human.Name);
+
+human.Name = "qwqwqe";
+db.Update(human);
+
+db.Remove(1);
