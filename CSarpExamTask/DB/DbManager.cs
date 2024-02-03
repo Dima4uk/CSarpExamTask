@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -20,10 +21,13 @@ public class DbManager //<T> where T : class
     public void Add<T>(T entity) where T : class
     {
         //перевірка чи вже додано
+        var entityId = _context.Entry(entity).Property("Id").CurrentValue;
 
+        if (null == _context.Set<T>().Find(entityId))
+        {
             _context.Set<T>().Add(entity);
             _context.SaveChanges();
-
+        }
 
     }
     public T? Read<T>(int Id) where T : class
@@ -69,12 +73,17 @@ public class DbManager //<T> where T : class
         if (car != null)
             throw new ArgumentException("Model car not found");
 
-        Func<Human, bool> f = () => { };
-        return _context.Humans.Where(f);
+        return _context.Humans.Where(h => car.Any(c => c.HumanId == h.Id));
     }
     //Повернути Hous за Name Human
-    //Повернути Car за Name Human
-    //Повернути Hous та Car за id Human
+    public IEnumerable<House> GetHousesByName(string name)
+    {
+        var human = _context.Humans.Where(h => h.Name == name);
+       if (human != null)
+            throw new ArgumentException("Name not found");
+        return _context.Houses.Where(h => human.Any(hu=> hu.HouseId == h.Id));
+    }
+
     public void PrintAllHummanHouse()
     {
         var q = from human in _context.Humans

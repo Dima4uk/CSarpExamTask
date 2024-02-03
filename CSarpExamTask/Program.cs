@@ -9,7 +9,7 @@ House house3 = new House() { Street = "Rtyu", Number = 7 };
 
 
 Human human1 = new Human() { Name = "Adsfdhs", Surname = "Aester", HouseId = house3.Id };
-Human human2 = new Human() { Name = "Bikdf", Surname = "Bester", HouseId = house1.Id };
+Human human2 = new Human() { Name = "Bikdf", Surname = "Bester", HouseId = house3.Id };
 Human human3 = new Human() { Name = "Codif", Surname = "Cester", HouseId = house2.Id };
 
 Console.WriteLine(human1.Id+"  "+human1.HouseId);
@@ -18,7 +18,7 @@ Console.WriteLine(human3.Id + "  " + human3.HouseId);
 
 Car car1 = new Car() { HumanId = human3.Id, Model = Models.Skoda, EngineSize = 2.5 };
 Car car2 = new Car() { HumanId = human2.Id, Model = Models.Mazda, EngineSize = 2.3 };
-Car car3 = new Car() { HumanId = human1.Id, Model = Models.Tesla, EngineSize = 335 };
+Car car3 = new Car() { HumanId = human1.Id, Model = Models.Mazda, EngineSize = 3.5 };
 
 Console.WriteLine(car1.Id + "  " + car1.HumanId);
 Console.WriteLine(car2.Id + "  " + car2.HumanId);
@@ -47,5 +47,5 @@ db.Add(house3);
 //db.Remove<Human>(1);
 
 db.PrintAllHummanHouse();
-
+Console.WriteLine();
 db.PrintAllHummanCar();
