@@ -1,5 +1,6 @@
 ﻿using CSarpExamTask.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,11 @@ public class ApplicationContext : DbContext
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=app.db");
+        var config = new ConfigurationBuilder()
+                        .AddJsonFile("appsettings.json")
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .Build();
+
+        optionsBuilder.UseSqlite(config.GetConnectionString("DefaultConnection"));
     }
 }
